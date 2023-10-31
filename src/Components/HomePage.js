@@ -7,7 +7,6 @@ const HomePage = () => {
   const isSignedIn = useSelector((state) => state.user.isSignedIn)
   const dispatch = useDispatch();
   const login = (response) => {
-    console.log(response)
     dispatch(actions.setSignedIn(true))
     dispatch(actions.setUserData(response.profileObj))
   }
