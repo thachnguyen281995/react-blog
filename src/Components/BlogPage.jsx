@@ -17,7 +17,7 @@ const BlogPage = () => {
             setLoading(false)
         })
         .catch(err => console.log(err))
-    },[searchInput])
+    },[searchInput,blog_url,dispatch])
   return (
     <div className="blog__page">
         <h1 className="blog__page__header">Blogs</h1>
@@ -47,5 +47,4 @@ const BlogPage = () => {
     </div>
   )
 }
-
 export default BlogPage
