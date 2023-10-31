@@ -1,0 +1,48 @@
+import React from 'react'
+import { useDispatch,useSelector } from 'react-redux'
+import GoogleLogin from 'react-google-login'
+import { actions } from '../features/useSlice'
+import '../styling/home.css'
+const HomePage = () => {
+  const isSignedIn = useSelector((state) => state.user.isSignedIn)
+  const dispatch = useDispatch();
+  const login = (response) => {
+    console.log(response)
+    dispatch(actions.setSignedIn(true))
+    dispatch(actions.setUserData(response.profileObj))
+  }
+  return (
+    <div className="home__page" style={{ display: isSignedIn ? "none" : "" }}>
+      {!isSignedIn ? (
+        <div className="login__message">
+          <h2>📗</h2>
+          <h1>A Readers favourite place!</h1>
+          <p>
+            We provide high quality online resource for reading blogs. Just sign
+            up and start reading some quality blogs.
+          </p>
+          <GoogleLogin
+            clientId="1084334404054-jch76dh3eqbj787ostatku2t93h61muv.apps.googleusercontent.com"
+            render={(renderProps) => (
+              <button
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+                className="login__button"
+              >
+                Login with Google
+              </button>
+            )}
+            onSuccess={login}
+            onFailure={login}
+            isSignedIn={true}
+            cookiePolicy={"single_host_origin"}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+    </div>
+  );
+}
+
+export default HomePage
